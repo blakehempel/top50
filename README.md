@@ -78,8 +78,8 @@ As published in top academic journals through to the end of December 2018. Repro
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/your-repo.git
-cd your-repo
+git clone https://github.com/blakehempel/top50.git
+cd top50
 
 # (Optional) Create and activate a virtual environment
 python -m venv venv
