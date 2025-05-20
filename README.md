@@ -26,7 +26,7 @@ Source: Refinitiv, Hempel Wealth Management LLC
 
 
 ## Bloomberg MVP
-This was initially designed to validate [Bloomberg's MVP Index](https://www.bloomberg.com/professional/products/indices/quote/BMVP:IND). Bloomberg's research has since been used to launch an ETF, [Invesco Bloomberg MVP Multi-factor ETF](https://www.invesco.com/us/financial-products/etfs/product-detail?audienceType=investor&ticker=bmvp), ticker BMVP. The investment strategy " is constructed to track the performance of US large cap companies that exhibit strong fundamental characteristics for Momentum (M), Value (V), Volatility (V), and Profitability (P) utilizing a factor model developed by Bloomberg Intelligence."
+This framework was initially designed to validate [Bloomberg's MVP Index](https://www.bloomberg.com/professional/products/indices/quote/BMVP:IND) using a different data provider, specifically LSEG/Refinitiv/Thomson Reuters. Bloomberg's research has since been used to launch an ETF, [Invesco Bloomberg MVP Multi-factor ETF](https://www.invesco.com/us/financial-products/etfs/product-detail?audienceType=investor&ticker=bmvp), ticker BMVP. The investment strategy " is constructed to track the performance of US large cap companies that exhibit strong fundamental characteristics for Momentum (M), Value (V), Volatility (V), and Profitability (P) utilizing a factor model developed by Bloomberg Intelligence."
 
 ![Bloomberg MVP](twitter_gina_martin_adams_introducing_mpv_portfolio.jpg)
 Source: [Gina Martin Adams](https://twitter.com/GinaMartinAdams/status/1598431923294150656)
@@ -44,12 +44,28 @@ Historically, Warren Buffet’s investment approach can be described as a 1.6x l
 
 ## Factor History 
 
-Formal academic models have explained individual stock performance since the 1960s. In the research since, over 500 factors have been documented that explain individual stock outperformance, that can be organized into the following categories: 
+Since the development of the first asset pricing model in 1961, the Capital Asset Pricing Model (CAPM), academic models have attempted to explain individual stock performance.
 
-Size, Value, Investment, Momentum, Expected Growth, Profitability / Quality, High Beta & Low Volatility
+The CAPM model suggested that higher volatility stocks should have a higher expected rate of return, otherwise a rational investor wouldn’t invest. With the benefit of hindsight, the model was wrong. In the 60 years since CAPMs introduction, academic evidence actually shows the **most volatile group of stocks dramatically underperforms** the rest of the market.
+
+From CAPM, academic research jumped forward with the Fama-French three-factor model (volatility, size and value), then to the Carhart four-factor model (which added momentum). The Zhang q-factor model was another leap forward  (volatility, size, investment, and profitability), which motivated Fama-French to develop a five-factor and six-factor models (which took the q-factor model and added value and momentum).
+
+### Factor Explosion
 
 ![Factor Explosion](man_AAB_factors_fig1.jpg)
-As published in top academic journals through to the end of December 2018. Reproduction of a chart of Harvey and Liu (2019).
+
+~ 450 models published in top academic journals through to the end of December 2018, via Harvey and Liu (2019).
+
+### Reoccuring Factors
+Throughout the decades of academic research, a few factor categories keep showing up to explain an individual stock performance. 
+- Size
+- Value
+- Investment
+- Momentum
+- Expected Growth
+- Profitability / Quality
+- High Beta vs. Low Volatility
+
 
 ### Traditional Factors
 **Volatility:** While high beta historically was associated with higher absolute returns, the low volatility stocks have delivered higher risk-adjusted returns. Many investors, such as individuals, pension funds and mutual funds, are constrained in the leverage that they can take, and therefore must overweight riskier securities instead, creating a Low volatility anomaly.
@@ -67,6 +83,15 @@ As published in top academic journals through to the end of December 2018. Repro
 
 **Expected Growth** is a combination of the firm’s valuation, cash flow, and profitability.
 
+## Only 46 Investment Factors that Matter
+[**“Replicating Anomalies” by Hou, Xue, & Zhang (2017)**](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2961979)
+Hou, Xue and Zhang conducted a gigantic replication of the entire anomalies literature by compiling the largest-to-date data library with 447 anomaly variables. This included 57 variables on momentum, 68 variables on value-versus-growth, 38 variables from investment, 79 variables on profitability, 103 variables on intangibles, and 102 variables on trading frictions categories, using a common set of procedures. They results found indicate widespread statistical p-hacking in the anomalies literature.
+
+Out of 447 anomalies, 64% are insignificant at the standard 5% level; imposing a t-value of 3 cutoff, rather than the standard t-test of 1.96, raised the number of insignificant anomalies further to 85%:
+
+- 161 anomalies are Significant at the 95% confidence level with a t-test ≥ 1.96
+- 67 anomalies are Very Significant with more than 99% confidence (t-test ≥ 3) by imposing a cutoff t-value of 3, instead of the conventional 95% level.
+- Applying the q-factor model to explain the 161 significant anomalies, **left 46 unexplained alphas with significance (and 11 anomalies with t-test ≥ 3)**.
 
 ## Requirements
 
@@ -101,8 +126,17 @@ poetry run python main.py
 Describe how to use your project, with code examples if possible.
 
 
-## Authors and Acknowledgment
+## Acknowledgments
 
+alpha architect https://alphaarchitect.com/2021/04/building-a-better-q-factor-asset-pricing-model/
+
+Aswath Damodaran https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html
+
+Chris Cain https://cmtassociation.org/wp-content/uploads/2020/03/Cain-and-Connors-2020-Dow-Award-1.pdf
+
+Zhang (2015) “Digesting Anomalies: An Investment Approach”
+
+Zhang (2017) “Replicating Anomalies”
 
 
 ## License
