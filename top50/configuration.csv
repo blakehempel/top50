@@ -1,0 +1,8 @@
+parameters,value
+start_year,1
+start_month,2000
+end_month,11
+end_year,2022
+quarterlyAnalysis,TRUE
+sectorNeutralize,TRUE
+rebalanceDragInBPS,10
