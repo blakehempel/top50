@@ -1,4 +1,3 @@
-
 import pandas as pd
 import datetime as dt
 import numpy as np  # NumPy
@@ -8,6 +7,8 @@ from dateutil.relativedelta import relativedelta
 import time
 import seaborn as sns
 import matplotlib.pyplot as plt
+
+import createfactors as cf
 
 '''
 SET VARIABLES
@@ -56,7 +57,7 @@ portfolioSize = 50
 currentPortfolioHoldings = []
 marketHedge = False
 riskOffModifier = 0
-marketMomentum = True
+marketMomentum = False
 marketRiskOff = False
 usePriorPeriodBestFit = False
 
@@ -121,7 +122,62 @@ def start():
     ifTestMonthly = False
     ifTestQuarterly = True
 
+
+    setVariables()
+    portfolioPeriodReturns = []
+    #displayPeriodResults = False
+
     if ifTestQuarterly and testSectorNeutralize:
+        #Alpha Test
+        quarterlyAnalysis = True
+        sectorNeutralize = True
+    elif ifTestQuarterly and testSectorNeutralize is False:
+        #Bravo Test
+        quarterlyAnalysis = True
+        sectorNeutralize = False
+    elif ifTestMonthly and testSectorNeutralize:
+        #Charlie Test
+        quarterlyAnalysis = False
+        global_endMonth = 12
+        sectorNeutralize = True
+    elif ifTestMonthly and testSectorNeutralize is False:
+        #Delta Test
+        quarterlyAnalysis = False
+        global_endMonth = 12
+        sectorNeutralize = False
+    else:
+        pass
+
+    dfPerformance = BackTestLoop()
+    sns.lineplot(data=dfPerformance, dashes=False)
+    #plt.ticklabel_format(style='plain', axis='y')
+    #sns.lineplot(data=dfPerformance, palette="tab10", linewidth=2, dashes=False)
+    plt.yscale('log')
+    #plt.yscale('linear')
+    # plt.xticks(plt.xticks()[0], dfPerformance.Date.dt.date, rotation=90)
+    # Get the current axes
+    ax = plt.gca()
+    # Format y-axis tick labels with commas
+    import matplotlib.ticker as mtick
+    ax.yaxis.set_major_formatter(mtick.StrMethodFormatter('{x:,.0f}'))
+    plt.ylabel('Portfolo Value')
+    
+    # Rotate x-axis labels
+    #ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right')
+    # Adjust tick density
+    #ax.set_xticks(ax.get_xticks()[::3])  # Show every other tick
+    plt.show()
+    # dfPerformance.to_csv("PortfolioValues.csv")
+
+    df = pd.DataFrame(sp500TRPeriodReturns)
+    print("\nS&P 500 TR Period Returns")
+    print(df.describe())
+    
+    df = pd.DataFrame(portfolioPeriodReturns)
+    print("\n", parameterNarrative)
+    print(df.describe())
+
+    """ if ifTestQuarterly and testSectorNeutralize:
         #Alpha Test
         setVariables()
         portfolioPeriodReturns = []
@@ -133,9 +189,9 @@ def start():
         df = pd.DataFrame(sp500TRPeriodReturns)
         print("\nS&P 500 TR Period Returns")
         print(df.describe())
-
+        
         df = pd.DataFrame(portfolioPeriodReturns)
-        print("\nPortfolio Alpha Period Returns")
+        print("\n", parameterNarrative)
         print(df.describe())
 
         # loading lineplot
@@ -143,13 +199,9 @@ def start():
         #plt.yscale('log')
         #plt.yscale('linear')
         #plt.xticks(plt.xticks()[0], dfPerformance.Date.dt.date, rotation=90)
+
         
-        
-        
-        
-        
-        
-        plt.show()
+        #plt.show()
         #dfPerformance.to_csv("PortfolioValues.csv")
 
         pass
@@ -252,7 +304,7 @@ def start():
         # plt.xticks(plt.xticks()[0], dfPerformance.Date.dt.date, rotation=90)
         plt.show()
         # dfPerformance.to_csv("PortfolioValues.csv")
-
+ """
 
 def applyFactorModel(df):
     global parameterNarrative,marketHedge,marketRiskOff
@@ -311,11 +363,11 @@ def applyFactorModel(df):
 
 
     '''Bloomberg Factors'''
-    bloombergModel = False #'Bloomberg Top 50 Portfolio 2022 - Equal Weight Investment, Profitability, Low Volatility, Momentum'
+    bloombergModel = True #'Bloomberg Top 50 Portfolio 2022 - Equal Weight Investment, Profitability, Low Volatility, Momentum'
     improvedBloombergModel = False #"Revised Bloomberg Factors - Equal Weight Investment, Profitability, Low Volatility, Momentum"
 
     '''Warren Buffett Factors'''
-    warrenBuffett = False #'Buffett Factors, Equal Weight - Value, Profitability, Low Volatility'
+    warrenBuffett = False #'Buffett Factors: Equal Weight - Value, Profitability, Low Volatility'
     buffettPedersen = False #'Buffett Factors, Pedersen Weight - Value (.34), Profitability (.49), Low Volatility (.17)'
     modernBuffett = False #'Revised Buffett Factors - Equal Weight Investment, Profitability, Low Volatility'
     modernBuffett_PedersenWeights = False #'Revised Buffett Factors, Pedersen Weight - Value (.34), Profitability (.49), Low Volatility (.17)'
@@ -335,7 +387,7 @@ def applyFactorModel(df):
 
     hempelWeatlh_top50 = False # Hempel Wealth Top 50 
     hempelWealth_top50_lowVolatility = False # Hempel Wealth Top 50 Low Vol
-    onlyremoveHighestVolatility = True
+    onlyremoveHighestVolatility = False
     riskOffExperiment = False
 
 
@@ -364,7 +416,7 @@ def applyFactorModel(df):
                                    + df["Volatility Rank: Volatility 126D LT"]
         pass
     elif buffettPedersen:
-        parameterNarrative = "Buffett Factors, Pedersen Weight - Value (.34), Profitability (.49), Low Volatility (.17)"
+        parameterNarrative = "Buffett Factors with Pedersen Weight - Value (.34), Profitability (.49), Low Volatility (.17)"
         valueLoading = 0.34
         profitabilityLoading = 0.49
         volatilityLoading = 0.17
@@ -650,7 +702,13 @@ def BackTestLoop():
     global forwardPortfolioValue_SPXTR, forwardReturn_SPXTR, periodReturn_SPXTR, totalReturn_SPXTR, maxValue_SPXTR, maxDrawDown_SPXTR, forwardIndexValue_SPXTR, startIndexValue_SPXTR, currentIndexValue_SPXTR
     global currentPortfolioValue_top50, forwardReturn_top50, periodReturn_top50, totalReturn_top50, maxValue_top50, maxDrawDown_top50, forwardPortfolioValue_top50
     global parameterNarrative, portfolioPeriodReturns, sp500TRPeriodReturns, portfolioSize, currentPortfolioHoldings, marketHedge,marketMomentum, priorMonthEnd_String, usePriorPeriodBestFit,marketRiskOff,riskOffModifier
-    df_spxtr = pd.read_csv('SXPTR_monthly.csv', index_col='Calc Date', parse_dates=True)
+    
+    import os
+    current_directory = os.getcwd()
+    data_directory_path = os.path.join('top50','data')
+    full_path_spxtr_monthly = os.path.join(data_directory_path, 'SXPTR_monthly.csv')
+        
+    df_spxtr = pd.read_csv(full_path_spxtr_monthly, index_col='Calc Date', parse_dates=True)
     df_spxtr = df_spxtr.sort_index(ascending=True)
     df_spxtr['SMA15'] = df_spxtr['Price Close'].rolling(15).mean()
 
@@ -712,10 +770,15 @@ def BackTestLoop():
 
 
             '''GET TOP 50 Portfolio'''
-            df = pd.read_csv('./data/Factor_' + priorMonthEnd_String + '.csv', index_col='RICs')
+
+            data_directory_path
+            factor_file_path = os.path.join(data_directory_path, 'factors','Factor_' + priorMonthEnd_String + '.csv')
+            df = pd.read_csv(factor_file_path, index_col='RICs')
+
+            #df = pd.read_csv('./data/Factor_' + priorMonthEnd_String + '.csv', index_col='RICs')
             #df.to_csv('./data/Factor_' + priorMonthEnd_String + '.csv', index=True)
             df = df[~df.index.duplicated(keep='first')]
-            df = createFactors(df)
+            df = cf.createFactors(df)
             df = applyFactorModel(df)
             #df.to_csv('./parameters/Parameters_' + priorMonthEnd_String + '.csv', index=True)
 
@@ -727,7 +790,7 @@ def BackTestLoop():
                 parameterNarrative = 'priorPeriod_bestCombo3M' + parameterNarrative
                 dfPast = pd.read_csv('./data/Factor_' + priorMonthEnd_3MoAgo_String + '.csv', index_col='RICs')
                 dfPast = dfPast[~dfPast.index.duplicated(keep='first')]
-                dfPast = createFactors(dfPast)
+                dfPast = cf.createFactors(dfPast)
                 priorPeriod_bestCombo1M, priorPeriod_bestCombo3M = determineFactorBestFit(dfPast)
                 if quarterlyAnalysis:
                     df = applyFactorBestFit(df, priorPeriod_bestCombo3M)
@@ -1163,8 +1226,8 @@ def BackTestLoopwithHoldingPeriods():
     #dfSave.to_csv("BacktestResults.csv")
     return dfPerformance
 
-
-def createFactors(df):
+#Moved to a seperate createfactors.py
+""" def createFactors(df):
     df = df.replace(pd.NA, np.nan)
     # dfFactors = pd.DataFrame(index=df.index)
     ''' 
@@ -1302,7 +1365,7 @@ def createFactors(df):
     # df[""] = df[].rank(ascending=False, na_option='keep')
     # df[""] = df[].rank(ascending=False, na_option='keep')
     return df
-
+ """
 
 def determineFactorBestFitvsMarket(df, spx3MoReturn):
     pass
@@ -1553,8 +1616,8 @@ def getRandomLoading():
 
 
 if __name__ == '__main__':
-    from platform import python_version
-    print("Running Python version " + python_version())
+    #from platform import python_version
+    #print("Running Python version " + python_version())
     print('EikonBacktestEngine.py - Starting Project Top 50')
     start()
 

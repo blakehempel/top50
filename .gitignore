@@ -1,7 +1,6 @@
 # Data files
 top50/data/*
-#top50/data/*.csv
-#top50/data/factors/*.csv
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

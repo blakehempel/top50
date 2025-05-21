@@ -3,17 +3,16 @@ import os
 import sys
 
 
-def main(getdata=False, research=False):
+def main(getdata, research):
+    
     print('Project Top 50')
     if getdata:
         import top50.engine.eikondataloader as edl
         edl.start()
     
     if research:
-        from top50.engine.researchengine import ResearchEngine
-        re = ResearchEngine()
-        re.displayInterPeriodResults = False
-        re.run()
+        import top50.engine.researchengine as re
+        re.start()
     
     return
         
@@ -24,7 +23,8 @@ if __name__ == "__main__":
         os.system('cls' if os.name == 'nt' else 'clear')
     clear_console()
     
-    getdata=False, research=False
+    getdata = False
+    research = False
 
     # Check if any arguments were passed
     if len(sys.argv) > 1:

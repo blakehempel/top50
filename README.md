@@ -123,13 +123,18 @@ poetry install
 
 ## Usage
 
-1. set appropriate date range information in configuration.csv
+1. Run LSEG workstation on your local machine, enable api
 
-2. run start() method in eikondataloader 
-   1. this will download fundamental data from refinitiv 
-   2. calculate factor data from the raw fundamental data
+2. Set appropriate date range in configuration.csv, if needed.
 
-3. 
+3. Run start() method in eikondataloader 
+   1. Will download fundamental data from refinitiv using API
+   2. Calculate factor data from the raw fundamental data
+
+4. In the researchengine, applyFactorModel() method, and select the model of your choice; the default is the Bloomberg MVP model.
+
+5. Run researchengine, start() method
+
 ```bash
 
 ```
