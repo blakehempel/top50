@@ -1,4 +1,4 @@
-# Hempel Top 50 Quantamental Investment Model
+# Hempel Top 50 Quantitative Factor Investment Model
 
 **Hempel Top 50** is a python framework for analyzing Factor Investment Strategies. 
 
@@ -8,7 +8,7 @@ If you are seeking investment advice, I recommened talking to a CFP professional
 
 
 ## Results
-Developed two proprietary quantamental investment models, "Hempel Wealth Top 50" and "Hempel Wealth Top 50 Low Volatility". Both models had a higher annual return than the S&P 500 with lower volatility and a lower max drawdown over a period of 20+ years.
+Developed two proprietary Factor Investment models, "Hempel Wealth Top 50" and "Hempel Wealth Top 50 Low Volatility". Both models had a higher annual return than the S&P 500 with lower volatility and a lower max drawdown over a period of 20+ years.
 
 ### Model: Hempel Top 50
 
