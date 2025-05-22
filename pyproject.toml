@@ -2,7 +2,7 @@
 name = "top50"
 version = "0.1.0"
 description = ""
-authors = []
+authors = ["Blake Hempel <20483833+blakehempel@users.noreply.github.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
