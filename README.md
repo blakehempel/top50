@@ -135,10 +135,6 @@ poetry install
 
 5. Run researchengine, start() method
 
-```bash
-
-```
-
 
 ## Acknowledgments
 
