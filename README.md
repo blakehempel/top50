@@ -1,8 +1,10 @@
 # Hempel Top 50 Quantamental Investment Model
 
-**Hempel Top 50** is a python framework for analyzing Factor Investment Strategies. It was created in Q1 2023 by the quantitative developers at Hempel Wealth Management LLC, an investment advisory firm that has ceased operations. If you are seeking investment advice, I recommened talking to a CFP professional. 
+**Hempel Top 50** is a python framework for analyzing Factor Investment Strategies. 
 
-This codebase has been made public for posterity's sake, for this research was possible because I stood on the shoulders of giants.
+It was created in Q1 2023 by the quantitative developers at Hempel Wealth Management LLC, an investment advisory firm that has ceased operations. 
+
+If you are seeking investment advice, I recommened talking to a CFP professional. This codebase has been made public for posterity's sake, for this research was possible because I stood on the shoulders of giants.
 
 
 ## Results
