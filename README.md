@@ -1,6 +1,6 @@
 # Hempel Top 50 Quantitative Factor Investment Model
 
-**Hempel Top 50** is a is multi-factor investment algorithm that selects the best 50 securities in the S&P 500 using both fundamental data and a quantitative approach. 
+**Hempel Top 50** is a multi-factor investment algorithm that selects the best 50 securities in the S&P 500 using both fundamental data and a quantitative approach. 
 
 The python framework also allows for analyzing other Factor Investment Strategies including Warren Buffett's, Bloomberg's MVP, Fama-French and the q-Factor model. The software was created in Q4-2022 and Q1-2023, before the age of AI assistants, by the quantitative developers at Hempel Wealth Management LLC, an investment advisory firm that has ceased operations. This codebase has been made public for the benefit of future generations; this research was only possible because of the shoulders of the academic giants of the past.
 
