@@ -10,13 +10,13 @@ Developed two proprietary Factor Investment models, "Hempel Wealth Top 50" and "
 
 ### Model: Hempel Top 50
 
-Time period: 2000-1-1 to 2022-12-31; Quarterly Rebalanced; portfolio of the 50 best stocks (using Alpha, Profitability, Investment, & Low Volatility factors) from the S&P 500; Max Drawdown -35.3% vs. S&P500 -45.8%
+Time period: 2000-1-1 to 2022-12-31; Quarterly Rebalanced; portfolio of the 50 best stocks (using High Profitability, Low Investment, High LSEG-Alpha, & Low Volatility factors) from the S&P 500; Max Drawdown -35.3% vs. S&P500 -45.8%
 
 ![Top50](hempelwealthtop50_2000_2022.png)
 
 ### Model: Hempel Top 50 Low Volatility
 
-Time period: 2000-1-1 to 2022-12-31; Quarterly Rebalanced; portfolio of the 50 best stocks (equal weight Alpha, Profitability, Investment, & Low Volatility factors) from the S&P 500; Max Drawdown -35.2% vs. S&P500 -45.8%
+Time period: 2000-1-1 to 2022-12-31; Quarterly Rebalanced; portfolio of the 50 best stocks (equal weight High Profitability, Low Investment, High LSEG-Alpha, & Low Volatility factors) from the S&P 500; Max Drawdown -35.2% vs. S&P500 -45.8%
 
 ![Top50](hempelwealthtop50lowvol_2000_2022.png)
 
