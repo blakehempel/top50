@@ -1,10 +1,8 @@
 # Hempel Top 50 Quantitative Factor Investment Model
 
-**Hempel Top 50** is a python framework for analyzing Factor Investment Strategies. 
+**Hempel Top 50** is a is multi-factor investment algorithm that selects the best 50 securities in the S&P 500 using both fundamental data and a quantitative approach. 
 
-It was created in Q1 2023 by the quantitative developers at Hempel Wealth Management LLC, an investment advisory firm that has ceased operations. 
-
-If you are seeking investment advice, I recommened talking to a CFP professional. This codebase has been made public for posterity's sake, for this research was possible because I stood on the shoulders of giants.
+The python framework also allows for analyzing other Factor Investment Strategies including Warren Buffett's, Bloomberg's MVP, Fama-French and the q-Factor model. The software was created in Q4-2022 and Q1-2023, before the age of AI assistants, by the quantitative developers at Hempel Wealth Management LLC, an investment advisory firm that has ceased operations. This codebase has been made public for the benefit of future generations; this research was only possible because of the shoulders of the academic giants of the past.
 
 
 ## Results
@@ -12,13 +10,13 @@ Developed two proprietary Factor Investment models, "Hempel Wealth Top 50" and "
 
 ### Model: Hempel Top 50
 
-Time period: 2000-1-1 to 2022-12-31; Quarterly Rebalanced; portfolio of the 50 best stocks from the S&P 500; Max Drawdown -35.3% vs. S&P500 -45.8%
+Time period: 2000-1-1 to 2022-12-31; Quarterly Rebalanced; portfolio of the 50 best stocks (using Alpha, Profitability, Investment, & Low Volatility factors) from the S&P 500; Max Drawdown -35.3% vs. S&P500 -45.8%
 
 ![Top50](hempelwealthtop50_2000_2022.png)
 
 ### Model: Hempel Top 50 Low Volatility
 
-Time period: 2000-1-1 to 2022-12-31; Quarterly Rebalanced; portfolio of the 50 best stocks from the S&P 500; Max Drawdown -35.2% vs. S&P500 -45.8%
+Time period: 2000-1-1 to 2022-12-31; Quarterly Rebalanced; portfolio of the 50 best stocks (equal weight Alpha, Profitability, Investment, & Low Volatility factors) from the S&P 500; Max Drawdown -35.2% vs. S&P500 -45.8%
 
 ![Top50](hempelwealthtop50lowvol_2000_2022.png)
 
